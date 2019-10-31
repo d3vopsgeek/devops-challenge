@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node src/index.js",
-    "docker:build": "docker build -t rgs-nodejsapp:latest .",
+    "docker:build": "docker build -t rgs/nodejsapp:latest .",
     "docker:login": "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD",
-    "docker:push": "docker push rgs-nodejsapp:latest",
+    "docker:push": "docker push rgs/nodejsapp:latest",
     "ci:docker": "npm run docker:build && npm run docker:login && npm run docker:push"
   },
   "dependencies": {
