@@ -7,18 +7,6 @@ version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@0.0.4
 
-workflows:
-  build_test_deploy:
-    jobs:
-      - build
-      - aws-ecr/build_and_push_image:
-          region: us-east-1
-          account-url: ${AWS_ECR_ACCOUNT_URL}
-          repo: ${CIRCLE_PROJECT_REPONAME}
-          tag: ${CIRCLE_BUILD_NUM}
-          requires:
-            - build
-
 jobs:
   build:
     docker:
@@ -65,4 +53,9 @@ jobs:
             mv /tmp/docker/* /usr/bin
       - run: yarn ci:docker
       
+      - aws-ecr/build_and_push_image:
+          region: us-east-1
+          account-url: ${AWS_ECR_ACCOUNT_URL}
+          repo: ${CIRCLE_PROJECT_REPONAME}
+          tag: ${CIRCLE_BUILD_NUM}
       
