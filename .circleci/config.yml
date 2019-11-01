@@ -11,9 +11,6 @@ workflows:
   build_test_deploy:
     jobs:
       - build
-      - docker_hub_build_push_image:
-          requires:
-            - build
       - aws-ecr/build_and_push_image:
           region: us-east-1
           account-url: ${AWS_ECR_ACCOUNT_URL}
