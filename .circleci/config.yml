@@ -7,17 +7,23 @@ version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@0.0.4
 
+workflows:
+  build_deploy:
+    jobs:
+      - build
+      - aws-ecr/build_and_push_image:
+          region: us-west-1
+          account-url: ${AWS_ECR_ACCOUNT_URL}
+          repo: ${CIRCLE_PROJECT_REPONAME}
+          tag: ${CIRCLE_BUILD_NUM}
+          requires:
+            - build_test
+
 jobs:
   build:
     docker:
       # specify the version you desire here
       - image: node:10
-      # - image: circleci/node:7.10
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
 
     working_directory: ~/repo
 
@@ -52,10 +58,4 @@ jobs:
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
             mv /tmp/docker/* /usr/bin
       - run: yarn ci:docker
-      
-      - aws-ecr/build_and_push_image:
-          region: us-east-1
-          account-url: ${AWS_ECR_ACCOUNT_URL}
-          repo: ${CIRCLE_PROJECT_REPONAME}
-          tag: ${CIRCLE_BUILD_NUM}
       
