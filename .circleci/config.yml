@@ -30,7 +30,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           aws-region: AWS_DEFAULT_REGION
-          family: '${MY_SERVICE}'
+          family: '${MY_TASK_DEFINITION}'
           cluster-name: '${MY_CLUSTER}'
           container-image-name-updates: 'container=${MY_SERVICE},tag=${CIRCLE_SHA1}'
  
