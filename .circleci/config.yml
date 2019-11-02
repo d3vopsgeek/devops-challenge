@@ -25,12 +25,12 @@ workflows:
           # myECRRepository
           repo: '${MY_REPO}'
           # myECRRepoTag
-          tag: "$CIRCLE_SHA1"
+          tag: "${MY_TAG}"
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
           aws-region: AWS_DEFAULT_REGION
           family: '${MY_TASK_DEFINITION}'
           cluster-name: '${MY_CLUSTER}'
-          container-image-name-updates: 'container=${MY_SERVICE},tag=${CIRCLE_SHA1}'
+          container-image-name-updates: 'container=${MY_SERVICE},tag=${MY_TAG}'
  
