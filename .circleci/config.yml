@@ -34,4 +34,4 @@ workflows:
           cluster-name: '${MY_CLUSTER}'
           container-image-name-updates: 'container=${MY_CONTAINER},tag=${MY_TAG}'
 
-
+# Example
