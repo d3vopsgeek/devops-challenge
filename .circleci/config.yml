@@ -32,5 +32,5 @@ workflows:
           aws-region: AWS_DEFAULT_REGION
           family: '${MY_TASK_DEFINITION}'
           cluster-name: '${MY_CLUSTER}'
-          container-image-name-updates: 'container=${MY_SERVICE},tag=${MY_TAG}'
+          container-image-name-updates: 'container=${MY_CONTAINER},tag=${MY_TAG}'
  
